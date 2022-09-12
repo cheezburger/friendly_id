@@ -39,7 +39,7 @@ module FriendlyId
     end
 
     def exists_by_friendly_id?(id)
-      where(friendly_id_config.query_field => parse_friendly_id(id)).exists?
+      find_by_slug(id).present?
     end
 
     private
@@ -59,7 +59,7 @@ module FriendlyId
     end
 
     def first_by_friendly_id(id)
-      find_by(friendly_id_config.query_field => parse_friendly_id(id))
+      find_by_slug(id)
     end
 
     # Parse the given value to make it suitable for use as a slug according to
