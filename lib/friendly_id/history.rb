@@ -72,11 +72,11 @@ method.
     # Configures the model instance to use the History add-on.
     def self.included(model_class)
       model_class.class_eval do
-        has_many :slugs, -> {order(id: :desc)}, **{
-          :as         => :sluggable,
-          :dependent  => @friendly_id_config.dependent_value,
-          :class_name => Slug.to_s
-        }
+        has_many :slugs,
+          as: :sluggable,
+          dependent: @friendly_id_config.dependent_value,
+          class_name: Slug.to_s,
+          order: 'id DESC'
 
         after_save :create_slug
       end
