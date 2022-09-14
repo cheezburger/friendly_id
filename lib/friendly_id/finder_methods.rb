@@ -99,12 +99,7 @@ module FriendlyId
 
     def raise_not_found_exception(id)
       message = "can't find record with friendly id: #{id.inspect}"
-      if ActiveRecord.version < Gem::Version.create('5.0')
-        raise ActiveRecord::RecordNotFound.new(message)
-      else
-        raise ActiveRecord::RecordNotFound.new(message, name, friendly_id_config.query_field, id)
-      end
+      raise ActiveRecord::RecordNotFound.new(message)
     end
-
   end
 end
