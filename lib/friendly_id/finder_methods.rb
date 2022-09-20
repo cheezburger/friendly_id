@@ -28,6 +28,7 @@ module FriendlyId
 
     # Returns true if a record with the given id exists.
     def exists?(conditions = :none)
+      return super() if conditions.unfriendly_id? && conditions == :none
       return super if conditions.unfriendly_id?
       return true if exists_by_friendly_id?(conditions)
       super
