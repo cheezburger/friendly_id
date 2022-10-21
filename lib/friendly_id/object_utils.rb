@@ -39,15 +39,13 @@ module FriendlyId
     #     "123".friendly_id?                #=> nil
     #     "abc123".friendly_id?             #=> true
     def friendly_id?
-      return true if respond_to?(:to_i) && to_i.to_s != to_s
-
-      false
+      true if respond_to?(:to_i) && to_i.to_s != to_s
     end
 
     # True if the id is definitely unfriendly, false if definitely friendly,
     # else nil.
     def unfriendly_id?
-      !friendly_id?
+      val = friendly_id? ; !val unless val.nil?
     end
   end
 
